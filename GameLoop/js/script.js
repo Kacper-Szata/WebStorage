@@ -61,7 +61,7 @@ function input(event)
     {
         gamerInput = new GamerInput("None"); //No Input
     }
-     console.log("Gamer Input :" + gamerInput.action);
+    //console.log("Gamer Input :" + gamerInput.action);
 }
 
 function update() 
@@ -78,6 +78,7 @@ function update()
             gameobjects[i].y -= 5;
             //gameobjects[i].health = 100;
             console.log("Up");
+            updatePosition();
         }
 
         //if (gameobjects[i].health >= 1) {
@@ -90,6 +91,7 @@ function update()
                 //gameobjects[i].x += 1;
                 gameobjects[i].y += 5;
                 console.log("Down");
+                updatePosition();
             }
             //if (gameobjects[i].health >= 1) {
 
@@ -101,6 +103,7 @@ function update()
                     gameobjects[i].x += 5;
                     //gameobjects[i].y += 1;
                     console.log("Right");
+                    updatePosition();
                 }
 
                 if (gamerInput.action === "Left") 
@@ -108,6 +111,7 @@ function update()
                     gameobjects[i].x -= 5;
                     //gameobjects[i].y -= 1;
                     console.log("Left");
+                    updatePosition();
                 }
                 
     }
@@ -129,7 +133,7 @@ function draw()
             //console.log("Image :" + gameobjects[i].img);
         //}
     //}
-    console.log("Draw ...");
+    //console.log("Draw ...");
 
     //if (x < (200 + (image.width / 2)))
     //{
@@ -185,21 +189,25 @@ function buttonUP()
 {
     console.log("Up");
     gameobjects[0].y -= 15;
+    updatePosition();
 }
 function buttonDOWN()
 {
     console.log("Down");
     gameobjects[0].y += 15;
+    updatePosition();
 }
 function buttonRIGHT()
 {
     console.log("Right");
     gameobjects[0].x += 15;
+    updatePosition();
 }
 function buttonLEFT()
 {
     console.log("Left");
     gameobjects[0].x -= 15;
+    updatePosition();
 }
 
 function movementSelection() 
@@ -209,14 +217,14 @@ function movementSelection()
     if (active.checked == true) 
     {
       document.getElementById("HUD").innerHTML = selection + " Paused ";
-      console.log("Movement Paused");
+      //console.log("Movement Paused");
       gameobjects[0].x = gameobjects[0].x;
       gameobjects[0].y = gameobjects[0].y;
       
     } else 
     {
       document.getElementById("HUD").innerHTML = selection + " Running ";
-      console.log("Movement Active");
+      //console.log("Movement Active");
     }
   }
 
@@ -239,3 +247,51 @@ function movementSelection()
     "value": "Pistol crossbow"
   }
 ];*/
+function updatePosition() 
+{
+      localStorage.setItem('posX',gameobjects[0].x);
+      document.getElementById("posXText").innerHTML = " [ " + localStorage.getItem('posX') + " ] ";
+//-------------------------------------------------------------------------------------------------------------
+      localStorage.setItem('posY',gameobjects[0].y);
+      document.getElementById("posYText").innerHTML = " [ " + localStorage.getItem('posY') + " ] ";
+}
+
+function getPositionStorage() 
+{
+    var current_posX = localStorage.getItem('posX');
+    
+    if (isNaN(current_posX)) 
+    {
+        localStorage.setItem('posX',gameobjects[0].x);
+        document.getElementById("posXText").innerHTML = " [ " + localStorage.getItem('posX') + " ] ";
+      }
+    
+      gameobjects[0].x=localStorage.getItem('posX'); 
+      document.getElementById("posXText").innerHTML = " [ " + localStorage.getItem('posX') + " ] ";
+    //---------------------------------------------------------------------------------------------------------
+      var current_posY = localStorage.getItem('posY');
+    
+      if (isNaN(current_posY)) 
+      {
+          localStorage.setItem('posY',gameobjects[0].y);
+          document.getElementById("posYText").innerHTML = " [ " + localStorage.getItem('posY') + " ] ";
+        }
+      
+        gameobjects[0].y=localStorage.getItem('posY'); 
+        document.getElementById("posYText").innerHTML = " [ " + localStorage.getItem('posY') + " ] "
+
+  
+}
+
+function onPageLoad()
+{
+    getPositionStorage();
+}
+
+function resetPosition()
+{
+    localStorage.setItem('posX',0); 
+    gameobjects[0].x=0;
+    localStorage.setItem('posY',0);
+    gameobjects[0].y=0;
+}
