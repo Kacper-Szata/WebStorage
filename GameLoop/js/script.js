@@ -258,7 +258,8 @@ function updatePosition()
 
 function getPositionStorage() 
 {
-    var current_posX = localStorage.getItem('posX');
+    var current_posX =parseInt(localStorage.getItem('posX'));
+    
     
     if (isNaN(current_posX)) 
     {
@@ -269,7 +270,7 @@ function getPositionStorage()
       gameobjects[0].x=localStorage.getItem('posX'); 
       document.getElementById("posXText").innerHTML = " [ " + localStorage.getItem('posX') + " ] ";
     //---------------------------------------------------------------------------------------------------------
-      var current_posY = localStorage.getItem('posY');
+      var current_posY =parseInt(localStorage.getItem('posY'));
     
       if (isNaN(current_posY)) 
       {
