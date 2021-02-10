@@ -267,7 +267,7 @@ function getPositionStorage()
         document.getElementById("posXText").innerHTML = " [ " + localStorage.getItem('posX') + " ] ";
       }
     
-      gameobjects[0].x=localStorage.getItem('posX'); 
+      gameobjects[0].x=parseInt(localStorage.getItem('posX')); 
       document.getElementById("posXText").innerHTML = " [ " + localStorage.getItem('posX') + " ] ";
     //---------------------------------------------------------------------------------------------------------
       var current_posY =parseInt(localStorage.getItem('posY'));
@@ -278,7 +278,7 @@ function getPositionStorage()
           document.getElementById("posYText").innerHTML = " [ " + localStorage.getItem('posY') + " ] ";
         }
       
-        gameobjects[0].y=localStorage.getItem('posY'); 
+        gameobjects[0].y=parseInt(localStorage.getItem('posY')); 
         document.getElementById("posYText").innerHTML = " [ " + localStorage.getItem('posY') + " ] "
 
   
