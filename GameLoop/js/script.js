@@ -118,8 +118,25 @@ function update()
 }
 
 
-var x=0,
-y=1300;
+var x;
+var y;
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function () 
+{
+    if (this.readyState == 4 && this.status == 200) 
+    {
+        data = JSON.parse(this.responseText);
+        console.log(data);
+        x = data.x;
+        y = data.y;
+    } else {
+        //Default value if we can't get JSON
+        x = 500;
+        y = 500;
+    }
+};
+xmlhttp.open("GET", "level.json", true);
+xmlhttp.send();
 // Draw GameObjects to Console
 // Modify to Draw to Screen
 function draw() 
